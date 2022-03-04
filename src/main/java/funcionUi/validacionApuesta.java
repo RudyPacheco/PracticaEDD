@@ -18,26 +18,26 @@ public class validacionApuesta {
     public void validarApuestas(apuesta[] apuestas, int pos[]) {
         this.apuestas = apuestas;
         this.posiciones = pos;
-        
+
         for (int i = 0; i < apuestas.length; i++) {// n
             int[] temp;
             temp = apuestas[i].getLista();
-            int[] temp2 =apuestas[i].getLista();
-            for (int j = 0; j < temp.length; j++) {
-                
-            }
-            
-//ordenarBurbuja(temp);
-
-//            int contador;
-//            int aux = temp[0];
-//            for (int j = 0; j <10; j++) {//1
-//                if (aux==temp[j]) {
-//                    System.out.println("numero repetido");
-//                }else{
-//                    aux=temp[j];
-//                }
+//            int[] temp2 =apuestas[i].getLista();
+//            for (int j = 0; j < temp.length; j++) {
+//                
 //            }
+
+            ordenarBurbuja(temp);
+
+            int contador;
+            int aux = temp[0];
+            for (int j = 0; j < 10; j++) {//1
+                if (aux == temp[j]) {
+                    System.out.println("numero repetido");
+                } else {
+                    aux = temp[j];
+                }
+            }
 
         }
 
