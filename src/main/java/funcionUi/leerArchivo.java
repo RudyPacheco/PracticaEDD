@@ -25,47 +25,45 @@ public class leerArchivo {
         BufferedReader br = new BufferedReader(fr);
         String linea;
         while ((linea = br.readLine()) != null) {
-            apuestas = aumentarTamañoArreglo(apuestas);
-            ingresarApuesta(nuevaApuesta(apuestasString(linea)), apuestas);
-            //agregar orden de entrada de caballos en el arregolo general
-            //text.append(linea+"\n");
+            apuestas = aumentarArreglo(apuestas);
+            agregarApuesta(nuevaApuesta(separarComa(linea)), apuestas);
             System.out.println("Apuesta ingresada "+linea);
         }
         fr.close();
         return apuestas;
     }
     
-     private String[] apuestasString(String linea) {
+     private String[] separarComa(String linea) {
         return linea.split(",");
     }
      
       
 
-       private int[] separarPos(String[] apuestaString) {
+       private int[] obtenerPosiciones(String[] apuestaString) {
         int posiciones[] = new int[10];
         for (int i = 0; i < posiciones.length; i++) {
             try {
                 posiciones[i] = Integer.parseInt(apuestaString[i + 2]);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "esta posicion de entrada es invalida"+posiciones[i]);
+                JOptionPane.showMessageDialog(null, "Posicion invalida"+posiciones[i]);
             }
         }
         return posiciones;
     }
        
    private apuesta nuevaApuesta(String[] apuestaString) {
-        return new apuesta( apuestaString[0],Double.parseDouble(apuestaString[1]),separarPos(apuestaString));
+        return new apuesta( apuestaString[0],Double.parseDouble(apuestaString[1]),obtenerPosiciones(apuestaString));
     }
    
    
    
      
-    public void ingresarApuesta(apuesta apuesta, apuesta[] apuestas) {
+    public void agregarApuesta(apuesta apuesta, apuesta[] apuestas) {
         apuestas[apuestas.length-1] = apuesta;
     }
 
     
-    public apuesta[] aumentarTamañoArreglo(apuesta[] apuestas) {
+    public apuesta[] aumentarArreglo(apuesta[] apuestas) {
         if (apuestas == null) {
             return new apuesta[1];
         } else {

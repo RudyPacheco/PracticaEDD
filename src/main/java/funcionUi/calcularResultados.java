@@ -11,28 +11,35 @@ import objetos.apuesta;
  * @author andaryus7
  */
 public class calcularResultados {
-    
-    
-    public void calcular(int[] orden,apuesta[] apuestas){
-        int ganado=0;
+
+    private long tiempoT = 0;
+    private long tiempoPromedio = 0;
+
+    public apuesta[] calcular(int[] orden, apuesta[] apuestas) {
+        tiempoT = 0;
+        tiempoPromedio = 0;
+        long tiempoI = System.nanoTime();           
         for (int i = 0; i < apuestas.length; i++) {//n
-            
-            int[]temp = apuestas[i].getLista();
-            apuesta apuestaT= apuestas[i];
-            
+            int ganado = 0;
+            int[] temp = apuestas[i].getLista();
+            apuesta apuestaT = apuestas[i];
             for (int j = 0; j < 10; j++) {// 1 
-                if (orden[j]==temp[j]) {
-                    ganado = ganado + (10-j);
+                if (orden[j] == temp[j]) {
+                    ganado = ganado + (10 - j);
                 }
             }
             apuestaT.setGanancia(ganado);
-            System.out.println("Ganado "+ganado);
-            
+            System.out.println("Ganado " + ganado);
+            tiempoT += (System.nanoTime() - tiempoI);
         }
-        
-        
+        tiempoPromedio= tiempoT/ apuestas.length;
+        return apuestas;
+
     }
-    
+
+     public long getTiempoPromedioResutados() {
+        return tiempoPromedio;
+    }
     
     
 }

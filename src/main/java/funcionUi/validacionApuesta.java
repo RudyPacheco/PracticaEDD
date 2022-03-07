@@ -4,6 +4,7 @@
  */
 package funcionUi;
 
+import interfazUi.ingresoResultados;
 import objetos.apuesta;
 
 /**
@@ -13,65 +14,62 @@ import objetos.apuesta;
 public class validacionApuesta {
 
     private apuesta apuestas[];
-    private int posiciones[];
+    private int size = 0;
+    private long tiempoT = 0;
+    private long tiempoPromedioVerificacion = 0;
+    private String rechazadas = "---apuestas rechazadas---:     \n";
 
-    public void validarApuestas(apuesta[] apuestas, int pos[]) {
+    public apuesta[] validarApuestas(apuesta[] apuestas) {
+        long tiempoInicial = System.nanoTime();
         this.apuestas = apuestas;
-        this.posiciones = pos;
-
-        for (int i = 0; i < apuestas.length; i++) {// n
-            int[] temp;
-            temp = apuestas[i].getLista();
-//            int[] temp2 =apuestas[i].getLista();
-//            for (int j = 0; j < temp.length; j++) {
-//                
-//            }
-
-            ordenarBurbuja(temp);
-
-            int contador;
-            int aux = temp[0];
-            for (int j = 0; j < 10; j++) {//1
-                if (aux == temp[j]) {
-                    System.out.println("numero repetido");
-                } else {
-                    aux = temp[j];
+        size = apuestas.length;
+        for (int i = 0; i < apuestas.length; i++) {//n
+            int[] posiciones = new int[10];
+            for (int j = 0; j < 10; j++) {// 1
+                if (apuestas[i].getLista()[j]>=0 && apuestas[i].getLista()[j]<=10) {
+                    if (posiciones[apuestas[i].getLista()[j] - 1] == apuestas[i].getLista()[j]) {
+                        System.out.println("Numero repetido" + (apuestas[i].getLista()[j]));
+                        rechazadas += "Numero repetido " + (apuestas[i].getLista()[j]) + "en apuesta " + (i + 1);
+                        apuestas[i] = null;
+                        size--;
+                        break;
+                    } else {
+                        posiciones[apuestas[i].getLista()[j] - 1] = apuestas[i].getLista()[j];
+                        System.out.println("no repetido");
+                    }
+                }else{
+                    rechazadas += "Numero invalido " + (apuestas[i].getLista()[j]);
+                    apuestas[i] = null;
+                     break;
                 }
+                    
             }
-
+            tiempoT += (System.nanoTime() - tiempoInicial);
         }
+        tiempoPromedioVerificacion = tiempoT / apuestas.length;
+        return apuestas;
 
-//         for (int i = 0; i < pos.length; i++) {//n
-//             
-//             int j=0;
-//             int aux=pos[j];//1
-//             int iteraciones=0;//1
-//             
-//             
-//             if (aux==pos[j+1]) {
-//                 System.out.println("NUmeros repetidos apuesta ");
-//             }else{
-//                 j++;
-//             }
-//             if (iteraciones==10) {
-//                 System.out.println("Apuesta valida ");
-//             }
-//             
-//             
-//         }
     }
 
-    public static void ordenarBurbuja(int[] arreglo) {
-        int auxiliar;
-        for (int i = 0; i < (arreglo.length - 1); i++) { //ya no es necesario que de todas las vueltas ...
-            for (int j = 0; j < (arreglo.length - 1); j++) { //... para comprobar (y tambien tira error xd)
-                if (arreglo[j] > arreglo[j + 1]) { //si numeroActual > numeroSiguiente
-                    auxiliar = arreglo[j];
-                    arreglo[j] = arreglo[j + 1]; //intercambiar valores de los elementos, se va desplazando
-                    arreglo[j + 1] = auxiliar;
-                }
+    public apuesta[] limpiarApuestas(apuesta[] apuestas) {
+        apuesta[] apuestasL = new apuesta[size];
+              int pos = 0;
+        for (int i = 0; i < apuestas.length; i++) {
+            if (apuestas[i] != null) {
+                apuestasL[pos] = apuestas[i];
+                pos++;
             }
         }
+
+        return apuestasL;
+    }
+
+    public long getTiempoPromedio() {
+        return tiempoPromedioVerificacion;
+    }
+    
+    public String getRechazos(){
+        return rechazadas;
     }
 
 }

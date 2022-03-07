@@ -4,7 +4,11 @@
  */
 package interfazUi;
 
+import funcionUi.calcularResultados;
+import funcionUi.guardarArchivo;
 import funcionUi.leerArchivo;
+import funcionUi.llenarTablaR;
+import funcionUi.reporteT;
 import funcionUi.validacionApuesta;
 import java.io.File;
 import java.io.IOException;
@@ -21,12 +25,16 @@ public class ventanaInicial extends javax.swing.JFrame {
     /**
      * Creates new form ventanaInicial
      */
-     private apuesta apuestas[];
+    private apuesta apuestas[];
     private leerArchivo leerArchivo;
-    
+    private reporteT reportes;
+    private guardarArchivo guardar;
+
     public ventanaInicial() {
         initComponents();
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+    //    this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.guardar= new guardarArchivo();
+
     }
 
     /**
@@ -46,8 +54,34 @@ public class ventanaInicial extends javax.swing.JFrame {
         jPanelInferior = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jPanelCentral = new javax.swing.JPanel();
-        jButtonAbrirTexto = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jButtonIngresoUi = new javax.swing.JButton();
+        jButtonAbrirTexto = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jFormattedTextFieldMonto = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jFormattedTextFieldWin = new javax.swing.JFormattedTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jFormattedTextField2do = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jFormattedTextField3er = new javax.swing.JFormattedTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jFormattedTextField4to = new javax.swing.JFormattedTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jFormattedTextField5to = new javax.swing.JFormattedTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jFormattedTextField6to = new javax.swing.JFormattedTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jFormattedTextField7mo = new javax.swing.JFormattedTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jFormattedTextField8vo = new javax.swing.JFormattedTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jFormattedTextField9no = new javax.swing.JFormattedTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jFormattedTextField10mo = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,7 +144,7 @@ public class ventanaInicial extends javax.swing.JFrame {
         jPanelInferiorLayout.setHorizontalGroup(
             jPanelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInferiorLayout.createSequentialGroup()
-                .addContainerGap(473, Short.MAX_VALUE)
+                .addContainerGap(653, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(30, 30, 30))
         );
@@ -125,14 +159,9 @@ public class ventanaInicial extends javax.swing.JFrame {
         getContentPane().add(jPanelInferior, java.awt.BorderLayout.PAGE_END);
 
         jPanelCentral.setBackground(new java.awt.Color(0, 153, 255));
+        jPanelCentral.setLayout(new java.awt.BorderLayout());
 
-        jButtonAbrirTexto.setText("Abrir texto");
-        jButtonAbrirTexto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAbrirTextoActionPerformed(evt);
-            }
-        });
-        jPanelCentral.add(jButtonAbrirTexto);
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         jButtonIngresoUi.setText("Ingresar Apuesta");
         jButtonIngresoUi.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +169,136 @@ public class ventanaInicial extends javax.swing.JFrame {
                 jButtonIngresoUiActionPerformed(evt);
             }
         });
-        jPanelCentral.add(jButtonIngresoUi);
+        jPanel1.add(jButtonIngresoUi);
+
+        jButtonAbrirTexto.setText("Abrir texto");
+        jButtonAbrirTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAbrirTextoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonAbrirTexto);
+
+        jPanelCentral.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jPanel2.setBackground(new java.awt.Color(0, 153, 255));
+
+        jLabel2.setText("Nombre Apostador");
+
+        jLabel3.setText("Monto");
+
+        jLabel4.setText("Caballo Ganador");
+
+        jFormattedTextFieldWin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+
+        jLabel5.setText("Segundo caballo");
+
+        jLabel6.setText("Tercer Caballo");
+
+        jLabel7.setText("Cuarto Caballo");
+
+        jLabel8.setText("Quinto caballo");
+
+        jLabel9.setText("Sexto Caballo");
+
+        jLabel10.setText("Septimo Caballo");
+
+        jLabel11.setText("Ocatavo Caballo");
+
+        jLabel12.setText("Noveno Caballo");
+
+        jLabel13.setText("Decimo caballo");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldWin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField3er, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField5to, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField7mo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField9no, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(jFormattedTextField8vo))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jFormattedTextFieldMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jFormattedTextField2do, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                            .addComponent(jFormattedTextField4to)
+                            .addComponent(jFormattedTextField6to)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(23, 23, 23)
+                        .addComponent(jFormattedTextField10mo)))
+                .addContainerGap(130, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jFormattedTextFieldMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jFormattedTextFieldWin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jFormattedTextField2do, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jFormattedTextField3er, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jFormattedTextField4to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jFormattedTextField5to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jFormattedTextField6to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jFormattedTextField7mo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jFormattedTextField8vo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jFormattedTextField9no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(jFormattedTextField10mo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+
+        jPanelCentral.add(jPanel2, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanelCentral, java.awt.BorderLayout.CENTER);
 
@@ -149,8 +307,8 @@ public class ventanaInicial extends javax.swing.JFrame {
 
     private void jButtonAbrirTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirTextoActionPerformed
         // TODO add your handling code here:
-        
-        leerArchivo= new  leerArchivo();
+
+        leerArchivo = new leerArchivo();
         JFileChooser fileChosser = new JFileChooser();
         int seleccion = fileChosser.showOpenDialog(this);
         if (seleccion == JFileChooser.APPROVE_OPTION) {
@@ -161,21 +319,82 @@ public class ventanaInicial extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error al leer el archivo");
             }
         }
-        
-        
+
+
     }//GEN-LAST:event_jButtonAbrirTextoActionPerformed
 
     private void jButtonIngresoUiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresoUiActionPerformed
         // TODO add your handling code here:
-        ingresarApuesta ventanaApuesta = new ingresarApuesta(this);
-        ventanaApuesta.setVisible(true);
-        this.setVisible(false);
+        // ingresarApuesta ventanaApuesta = new ingresarApuesta(this,apuestas);
+        //ventanaApuesta.setVisible(true);
+        //this.setVisible(false);
+        int[] pos = posiciones();
+        for (int i = 0; i < pos.length; i++) {
+            System.out.println(pos[i]);
+        }
+        if (!isEmpy()) {
+            leerArchivo = new leerArchivo();
+            apuestas = leerArchivo.aumentarArreglo(apuestas);
+            String nombre = jTextFieldNombre.getText();
+            double monto = Double.valueOf(jFormattedTextFieldMonto.getText());
+            apuesta apuestaN = new apuesta(nombre, monto, pos);
+            leerArchivo.agregarApuesta(apuestaN, apuestas);
+
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+        }
+
+
     }//GEN-LAST:event_jButtonIngresoUiActionPerformed
+
+    public int[] posiciones() {
+        int[] pos = null;
+        try {
+            int uno = Integer.valueOf(jFormattedTextFieldWin.getText());
+            int dos = Integer.valueOf(jFormattedTextField2do.getText());
+            int tres = Integer.valueOf(jFormattedTextField3er.getText());
+            int cuatro = Integer.valueOf(jFormattedTextField4to.getText());
+            int cinco = Integer.valueOf(jFormattedTextField5to.getText());
+            int seis = Integer.valueOf(jFormattedTextField6to.getText());
+            int siete = Integer.valueOf(jFormattedTextField7mo.getText());
+            int ocho = Integer.valueOf(jFormattedTextField8vo.getText());
+            int nueve = Integer.valueOf(jFormattedTextField9no.getText());
+            int diez = Integer.valueOf(jFormattedTextField10mo.getText());
+            int[] pos1 = {uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez};
+            pos = pos1;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar Solo numeros del 1 al 10");
+        }
+        return pos;
+    }
+
+    public boolean isEmpy() {
+        if (jTextFieldNombre.getText().isEmpty() | jFormattedTextFieldMonto.getText().isEmpty() | jFormattedTextFieldWin.getText().isEmpty() | jFormattedTextField2do.getText().isEmpty() | jFormattedTextField3er.getText().isEmpty() | jFormattedTextField4to.getText().isEmpty() | jFormattedTextField5to.getText().isEmpty() | jFormattedTextField6to.getText().isEmpty() | jFormattedTextField7mo.getText().isEmpty() | jFormattedTextField8vo.getText().isEmpty() | jFormattedTextField9no.getText().isEmpty() | jFormattedTextField10mo.getText().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        validacionApuesta validar = new validacionApuesta();
-        validar.validarApuestas(apuestas, apuestas[0].getLista());
+        if (apuestas!=null ) {
+             validacionApuesta validar = new validacionApuesta();
+        this.reportes = new reporteT();
+
+        this.apuestas = validar.validarApuestas(apuestas);
+        this.apuestas = validar.limpiarApuestas(apuestas);
+        guardar.guardar(validar.getRechazos());
+        reportes.setTimpoPormedioVerificacion(validar.getTiempoPromedio());
+        ingresoResultados ingreso = new ingresoResultados(apuestas, reportes);
+        ingreso.setVisible(true);
+        this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe ingresar al menos una apuesta");
+        }
+       
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -217,11 +436,37 @@ public class ventanaInicial extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAbrirTexto;
     private javax.swing.JButton jButtonIngresoUi;
+    private javax.swing.JFormattedTextField jFormattedTextField10mo;
+    private javax.swing.JFormattedTextField jFormattedTextField2do;
+    private javax.swing.JFormattedTextField jFormattedTextField3er;
+    private javax.swing.JFormattedTextField jFormattedTextField4to;
+    private javax.swing.JFormattedTextField jFormattedTextField5to;
+    private javax.swing.JFormattedTextField jFormattedTextField6to;
+    private javax.swing.JFormattedTextField jFormattedTextField7mo;
+    private javax.swing.JFormattedTextField jFormattedTextField8vo;
+    private javax.swing.JFormattedTextField jFormattedTextField9no;
+    private javax.swing.JFormattedTextField jFormattedTextFieldMonto;
+    private javax.swing.JFormattedTextField jFormattedTextFieldWin;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelCentral;
     private javax.swing.JPanel jPanelDerecho;
     private javax.swing.JPanel jPanelInferior;
     private javax.swing.JPanel jPanelIzquierdo;
     private javax.swing.JPanel jPanelSuperior;
+    private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
 }
